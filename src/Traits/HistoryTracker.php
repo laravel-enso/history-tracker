@@ -29,6 +29,6 @@ trait HistoryTracker
 
     public function histories()
     {
-        return $this->hasMany($this->$historyModel);
+        return $this->hasMany($this->historyModel);
     }
 }
