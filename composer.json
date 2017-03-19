@@ -1,0 +1,21 @@
+{
+    "name": "laravel-enso/historytracker",
+    "description": "Trait for tracking a table histories",
+    "type": "trait",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "mishu",
+            "email": "mishu@xtelecom.ro"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.4",
+        "laravel/framework": "5.4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "LaravelEnso\\HistoryTracker\\": "src/"
+        }
+    }
+}
