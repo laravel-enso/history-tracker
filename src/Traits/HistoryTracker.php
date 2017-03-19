@@ -2,25 +2,24 @@
 
 namespace LaravelEnso\HistoryTracker\Traits;
 
-trait HistoryTracker {
-
+trait HistoryTracker
+{
     //protected static $historyModel = '';
 
     protected static function bootTrackHistory()
     {
-        static::created(function($model)
-        {
+        static::created(function ($model) {
             static::saveHistory($model);
         });
 
-        static::updated(function($model)  {
+        static::updated(function ($model) {
             static::saveHistory($model);
         });
     }
 
     private static function saveHistory($model)
     {
-        $history = new static::$historyModel;
+        $history = new static::$historyModel();
 
         //the history model needs  to have both updated_by and created_by
         //attributes as fillable
