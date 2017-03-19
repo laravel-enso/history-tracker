@@ -19,7 +19,7 @@ trait HistoryTracker
 
     private static function saveHistory($model)
     {
-        $history = new $this->historyModel;
+        $history = new $this->historyModel();
 
         //the history model needs  to have both updated_by and created_by
         //attributes as fillable
