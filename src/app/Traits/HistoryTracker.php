@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\HistoryTracker\Traits;
+namespace LaravelEnso\HistoryTracker\App\Traits;
 
 trait HistoryTracker
 {
@@ -20,9 +20,6 @@ trait HistoryTracker
     private static function saveHistory($model)
     {
         $history = new $this->historyModel();
-
-        //the history model needs  to have both updated_by and created_by
-        //attributes as fillable
         $history->fill($model->toArray());
         $model->histories()->save($history);
     }
