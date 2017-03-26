@@ -1,6 +1,6 @@
 {
     "name": "laravel-enso/historytracker",
-    "description": "Trait for tracking a table histories",
+    "description": "Trait for tracking a model histories",
     "type": "trait",
     "license": "MIT",
     "authors": [
