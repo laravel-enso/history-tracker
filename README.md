@@ -7,7 +7,7 @@
 
 Trait for tracking a model's histories.
 
-### User
+### Use
 
 1. Create a mirror table like 'mytable_histories' where mytable is the table/model that you want to track.
 
