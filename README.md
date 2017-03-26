@@ -11,9 +11,21 @@ Trait for tracking a model's histories.
 
 1. Create a mirror table like 'mytable_histories' where mytable is the table/model that you want to track.
 
-2. In MyTableHistory model add `protected $fillable = ['id', ......]` with all the attributes that you want to track.
+2. In MyTableHistory model add
 
-3. In the main model that need tracking, MyTable in our case, add `use LaravelEnso\HistoryTracker\App\Traits\HistoryTracker` and `protected static $historyModel = 'MyTableHistory'`, so the Trait will know which model to use for history.
+```
+protected $fillable = ['id', ......]
+```
+
+with all the attributes that you want to track.
+
+3. In the main model that need tracking, MyTable in our case, add
+
+```
+use LaravelEnso\HistoryTracker\App\Traits\HistoryTracker
+```
+
+and `protected static $historyModel = 'MyTableHistory'`, so the Trait will know which model to use for history.
 
 ### Note
 
