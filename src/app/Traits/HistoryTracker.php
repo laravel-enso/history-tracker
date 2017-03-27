@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\HistoryTracker\App\Traits;
+namespace LaravelEnso\HistoryTracker\app\Traits;
 
 trait HistoryTracker
 {

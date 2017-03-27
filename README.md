@@ -22,7 +22,7 @@ with all the attributes that you want to track.
 3. In the main model that need tracking, MyTable in our case, add
 
 ```
-use LaravelEnso\HistoryTracker\App\Traits\HistoryTracker
+use LaravelEnso\HistoryTracker\app\Traits\HistoryTracker
 ```
 
 and `protected static $historyModel = 'MyTableHistory'`, so the Trait will know which model to use for history.
