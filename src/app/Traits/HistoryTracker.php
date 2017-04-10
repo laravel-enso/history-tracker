@@ -19,13 +19,13 @@ trait HistoryTracker
 
     private static function saveHistory($model)
     {
-        $history = new $this->historyModel();
+        $history = new self::$historyModel();
         $history->fill($model->toArray());
         $model->histories()->save($history);
     }
 
     public function histories()
     {
-        return $this->hasMany($this->historyModel);
+        return $this->hasMany(self::$historyModel);
     }
 }
