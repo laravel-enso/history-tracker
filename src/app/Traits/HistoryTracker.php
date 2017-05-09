@@ -6,7 +6,7 @@ trait HistoryTracker
 {
     // private static $historyModel = '';
 
-    protected static function bootTrackHistory()
+    protected static function bootHistoryTracker()
     {
         self::created(function ($model) {
             self::saveHistory($model);
