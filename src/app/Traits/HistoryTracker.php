@@ -8,11 +8,11 @@ trait HistoryTracker
 
     protected static function bootHistoryTracker()
     {
-        self::created(function($model) {
+        self::created(function ($model) {
             self::saveHistory($model);
         });
 
-        self::updated(function($model) {
+        self::updated(function ($model) {
             self::saveHistory($model);
         });
     }
