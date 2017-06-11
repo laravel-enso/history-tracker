@@ -4,7 +4,7 @@ namespace LaravelEnso\HistoryTracker\app\Traits;
 
 trait HistoryTracker
 {
-    // private static $historyModel = '';
+    // protected static $historyModel = '';
 
     protected static function bootHistoryTracker()
     {
