@@ -4,33 +4,33 @@
 [![Total Downloads](https://poser.pugx.org/laravel-enso/historytracker/downloads)](https://packagist.org/packages/laravel-enso/historytracker)
 [![Latest Stable Version](https://poser.pugx.org/laravel-enso/historytracker/version)](https://packagist.org/packages/laravel-enso/historytracker)
 
-Trait for tracking a model's histories.
+Trait for tracking a model's history.
 
 ### Use
 
-1. Create a histories table `model_histories` where model is what you need track.
+1. Create a histories table such as `model_histories`, where model is what you need to keep track of.
 
 2. In ModelHistory model add
 
-```
-protected $fillable = ['id', 'model_id', 'all', 'attributes', 'from', 'the', original', 'model']
-```
+    ```
+    protected $fillable = ['id', 'model_id', 'all', 'attributes', 'from', 'the', original', 'model']
+    ```
 
 3. Add to the tracked Model the following trait:
 
-```
-use HistoryTracker;
-```
+    ```
+    use HistoryTracker;
+    ```
 
 4. Add to the tracked model the following property:
 
-`protected static $historyModel = 'ModelHistory'`
+    `protected static $historyModel = 'ModelHistory'`
 
-5. Enjoy.
+5. Now, each time the a tracked model instance is created or updated, an entry will be inserted in the corresponding history table, mirroring the data from model and having a link (fk) to the tracked model.
 
 ### Note
 
-The laravel-enso/core package comes with this library included.
+The [laravel-enso/core](https://github.com/laravel-enso/Core) package comes with this library included.
 
 ### Contributions
 
