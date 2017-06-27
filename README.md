@@ -6,6 +6,12 @@
 
 Model history tracking dependency for [Laravel Enso](https://github.com/laravel-enso/Enso).
 
+### Details
+
+The trait helps keep the history for a model by saving each version of the model in a different 'history' table.
+Each record in the history table is linked via a FK to the original model and is recommended to have a created_at column,
+since the records should not be updated.
+
 ### Use
 
 1. Create a histories table such as `model_histories`, where model is what you need to keep track of.
