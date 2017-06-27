@@ -4,7 +4,7 @@
 [![Total Downloads](https://poser.pugx.org/laravel-enso/historytracker/downloads)](https://packagist.org/packages/laravel-enso/historytracker)
 [![Latest Stable Version](https://poser.pugx.org/laravel-enso/historytracker/version)](https://packagist.org/packages/laravel-enso/historytracker)
 
-Trait for tracking a model's history.
+Model history tracking dependency for [Laravel Enso](https://github.com/laravel-enso/Enso).
 
 ### Use
 
@@ -28,7 +28,7 @@ Trait for tracking a model's history.
 
 5. Now, each time the a tracked model instance is created or updated, an entry will be inserted in the corresponding history table, mirroring the data from model and having a link (fk) to the tracked model.
 
-### Note
+### Notes
 
 The [laravel-enso/core](https://github.com/laravel-enso/Core) package comes with this library included.
 
