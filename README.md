@@ -21,15 +21,11 @@ since the records should not be updated.
 
 2. In ModelHistory model add
 
-    ```
-    protected $fillable = ['id', 'model_id', 'all', 'attributes', 'from', 'the', original', 'model']
-    ```
+    `protected $fillable = ['id', 'model_id', 'all', 'attributes', 'from', 'the', original', 'model']`
 
 3. Add to the tracked Model the following trait:
 
-    ```
-    use HistoryTracker;
-    ```
+    `use HistoryTracker;`
 
 4. Add to the tracked model the following property:
 
