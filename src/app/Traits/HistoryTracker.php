@@ -25,7 +25,9 @@ trait HistoryTracker
 
     private static function saveHistory($model)
     {
-        self::$historyModel::create($model->toArray());
+        $history = new self::$historyModel();
+        $history->fill($model->toArray());
+        $model->histories()->save($history);
     }
 
     public function histories()
