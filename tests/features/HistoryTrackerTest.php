@@ -33,8 +33,9 @@ class HistoryTrackerTest extends TestHelper
         $trackedModel = TrackedModel::create(['name' => $this->faker->word]);
 
         $trackedModel->name = 'Updated';
+        $trackedModel->save();
 
-        $this->assertTrue(TrackedModelHistory::first()->name === $trackedModel->fresh()->name);
+        $this->assertNotNull(TrackedModelHistory::where('name', 'Updated')->first());
     }
 
     /** @test */
