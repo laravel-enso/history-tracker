@@ -24,7 +24,7 @@ class HistoryTrackerTest extends TestHelper
     {
         $trackedModel = TrackedModel::create(['name' => $this->faker->word]);
 
-        $this->assertTrue(TrackedModelHistory::first()->name === $trackedModel->name);
+        $this->assertEquals($trackedModel->name, TrackedModelHistory::first()->name);
     }
 
     /** @test */
@@ -35,18 +35,22 @@ class HistoryTrackerTest extends TestHelper
         $trackedModel->name = 'Updated';
         $trackedModel->save();
 
-        $this->assertNotNull(TrackedModelHistory::where('name', 'Updated')->first());
+        $this->assertEquals($trackedModel->name, $trackedModel->histories->last()->name);
     }
 
     /** @test */
     public function keeps_model_in_history_table_after_deleting_it()
     {
         $trackedModel = TrackedModel::create(['name' => $this->faker->word]);
+        $id = $trackedModel->id;
 
         $trackedModel->delete();
 
         $this->assertNull($trackedModel->fresh());
-        $this->assertTrue(TrackedModelHistory::first()->name === $trackedModel->name);
+
+        $count = TrackedModelHistory::whereTrackedModelId($id)->count();
+
+        $this->assertEquals(1, $count);
     }
 
     private function createTrackedModelsTable()
