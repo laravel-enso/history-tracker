@@ -4,9 +4,9 @@ use Faker\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Schema;
 use LaravelEnso\HistoryTracker\app\Traits\HistoryTracker;
-use LaravelEnso\TestHelper\app\Classes\TestHelper;
+use Tests\TestCase;
 
-class HistoryTrackerTest extends TestHelper
+class HistoryTrackerTest extends TestCase
 {
     private $faker;
 
@@ -42,7 +42,7 @@ class HistoryTrackerTest extends TestHelper
     public function keeps_model_in_history_table_after_deleting_it()
     {
         $trackedModel = TrackedModel::create(['name' => $this->faker->word]);
-        $id = $trackedModel->id;
+        $id           = $trackedModel->id;
 
         $trackedModel->delete();
 
@@ -78,7 +78,7 @@ class TrackedModel extends Model
     use HistoryTracker;
 
     protected static $historyModel = TrackedModelHistory::class;
-    protected $fillable = ['name'];
+    protected $fillable            = ['name'];
 }
 
 class TrackedModelHistory extends Model
