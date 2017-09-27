@@ -42,7 +42,7 @@ class HistoryTrackerTest extends TestCase
     public function keeps_model_in_history_table_after_deleting_it()
     {
         $trackedModel = TrackedModel::create(['name' => $this->faker->word]);
-        $id           = $trackedModel->id;
+        $id = $trackedModel->id;
 
         $trackedModel->delete();
 
@@ -78,7 +78,7 @@ class TrackedModel extends Model
     use HistoryTracker;
 
     protected static $historyModel = TrackedModelHistory::class;
-    protected $fillable            = ['name'];
+    protected $fillable = ['name'];
 }
 
 class TrackedModelHistory extends Model
