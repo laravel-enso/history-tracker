@@ -4,34 +4,43 @@ namespace LaravelEnso\HistoryTracker\app\Traits;
 
 trait HistoryTracker
 {
-    // protected static $historyModel = '';
+    // protected $historyModel = HistoryModel::class;
 
     protected static function bootHistoryTracker()
     {
         self::created(function ($model) {
-            self::saveHistory($model);
+            $model->saveHistory();
         });
 
         self::updated(function ($model) {
-            self::saveHistory($model);
+            $model->saveHistory();
         });
 
         self::deleted(function ($model) {
             if (method_exists($model, 'bootSoftDeletes')) {
-                self::saveHistory($model);
+                $model->saveHistory();
             }
         });
     }
 
-    private static function saveHistory($model)
-    {
-        $history = new self::$historyModel();
-        $history->fill($model->toArray());
-        $model->histories()->save($history);
-    }
-
     public function histories()
     {
-        return $this->hasMany(self::$historyModel);
+        return $this->hasMany($this->historyModel);
+    }
+
+    private function saveHistory()
+    {
+        if ($this->needsHistory()) {
+            $history = $this->historyModel::create($this->toArray());
+            $this->histories()->save($history);
+        }
+    }
+
+    private function needsHistory()
+    {
+        return collect($this->getDirty())
+            ->keys()
+            ->intersect((new $this->historyModel())->getFillable())
+            ->isNotEmpty();
     }
 }
