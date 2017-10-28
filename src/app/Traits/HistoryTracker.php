@@ -40,7 +40,7 @@ trait HistoryTracker
         }
 
         if ($this->needsHistory()) {
-            $history = $this->historyModel::create($this->toArray());
+            $history = new $this->historyModel($this->toArray());
             $this->histories()->save($history);
         }
     }
