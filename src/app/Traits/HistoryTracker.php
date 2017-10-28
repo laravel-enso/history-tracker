@@ -2,6 +2,8 @@
 
 namespace LaravelEnso\HistoryTracker\app\Traits;
 
+use LogicException;
+
 trait HistoryTracker
 {
     // protected $historyModel = HistoryModel::class;
@@ -30,10 +32,22 @@ trait HistoryTracker
 
     private function saveHistory()
     {
+        if ($this->missesHistoryModel()) {
+            throw new LogicException(sprintf(
+                __('You forgot to set up the historyModel property for %s'),
+                get_class($this))
+            );
+        }
+
         if ($this->needsHistory()) {
             $history = $this->historyModel::create($this->toArray());
             $this->histories()->save($history);
         }
+    }
+
+    private function missesHistoryModel()
+    {
+        return !property_exists($this, 'historyModel');
     }
 
     private function needsHistory()
