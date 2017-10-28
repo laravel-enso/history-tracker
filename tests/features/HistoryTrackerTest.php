@@ -78,7 +78,7 @@ class TrackedModel extends Model
     use HistoryTracker;
 
     protected $historyModel = TrackedModelHistory::class;
-    protected $fillable = [ 'name' ];
+    protected $fillable = ['name'];
 }
 
 class TrackedModelHistory extends Model
