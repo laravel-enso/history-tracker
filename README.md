@@ -16,22 +16,24 @@ Each record in the history table is linked via a FK to the original model and is
 since the records should not be updated.
 
 ### Use
+You can choose the attributes you want to store from the tracked model by declaring them as fillable in the history model. 
+ When the tracked model is updated, if any one of the those attributes changed, a new snapshot/history entry is persisted.  
 
 1. Create a histories table such as `model_histories`, where model is what you need to keep track of.
 
 2. In ModelHistory model add
 
-    `protected $fillable = ['id', 'model_id', 'all', 'attributes', 'from', 'the', original', 'model']`
+    `protected $fillable = ['id', 'model_id', 'all', 'the', 'attributes', 'you', 'want', 'tracked']`
 
-3. Add to the tracked Model the following trait:
+3. Add to the tracked model the following trait:
 
     `use HistoryTracker;`
 
 4. Add to the tracked model the following property:
 
-    `protected static $historyModel = 'ModelHistory'`
+    `protected $historyModel = ModelHistory::class`
 
-5. Now, each time the a tracked model instance is created or updated, an entry will be inserted in the corresponding history table, mirroring the data from model and having a link (fk) to the tracked model.
+5. Now, each time a tracked model instance is created or updated, if any of the tracked attributes changed, an entry will be inserted in the corresponding history table, mirroring the desired data from model and having a link (fk) to the tracked model.
 
 ### Notes
 
