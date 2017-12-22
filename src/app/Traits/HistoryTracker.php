@@ -33,14 +33,16 @@ trait HistoryTracker
     private function saveHistory()
     {
         if ($this->missesHistoryModel()) {
-            throw new LogicException(sprintf(
+            throw new LogicException(
+                sprintf(
                 __('You forgot to set up the historyModel property for %s'),
-                get_class($this))
+                get_class($this)
+            )
             );
         }
 
         if ($this->needsHistory()) {
-            $history = $this->historyModel::create($this->toArray());
+            $history = new $this->historyModel($this->toArray());
             $this->histories()->save($history);
         }
     }
