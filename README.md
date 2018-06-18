@@ -23,7 +23,7 @@ You can choose the attributes you want to store from the tracked model by declar
 
 2. In ModelHistory model add
 
-    `protected $fillable = ['id', 'model_id', 'all', 'the', 'attributes', 'you', 'want', 'tracked']`
+    `protected $fillable = ['model_id', 'all', 'the', 'attributes', 'you', 'want', 'tracked']`
 
 3. Add to the tracked model the following trait:
 
