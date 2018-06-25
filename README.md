@@ -7,37 +7,50 @@
 [![Latest Stable Version](https://poser.pugx.org/laravel-enso/historytracker/version)](https://packagist.org/packages/laravel-enso/historytracker)
 <!--/h-->
 
-Model history tracking dependency for [Laravel Enso](https://github.com/laravel-enso/Enso).
+Simple to use, customizable Laravel Model history tracking utility trait
+
+[Laravel Enso](https://github.com/laravel-enso/Enso) already includes this package
 
 ### Details
 
-The trait helps keep the history for a model by saving each version of the model in a different 'history' table.
-Each record in the history table is linked via a FK to the original model and is recommended to have a `created_at` column,
-since the records should not be updated.
+The trait helps keep track of the changes made to a model by saving each version of the model to a different 'history' table.
+Each record in the history table is linked via a FK to the original model.
 
-### Use
+### Usage
 You can choose the attributes you want to store from the tracked model by declaring them as fillable in the history model. 
- When the tracked model is updated, if any one of the those attributes changed, a new snapshot/history entry is persisted.  
+ When the model is created/updated, if any one of the tracked attributes has changed, a new snapshot/history entry is persisted.  
 
-1. Create a histories table such as `model_histories`, where model is what you need to keep track of.
+1. Create a histories table, such as `model_histories` - where model is what you need to keep track of.
 
-2. In ModelHistory model add
+2. Create a corresponding history model, such as `ModelHistory` and add as fillable the attributes you want tracked:
 
-    `protected $fillable = ['model_id', 'all', 'the', 'attributes', 'you', 'want', 'tracked']`
+    ```php 
+        protected $fillable = ['model_id', 'tracked', 'attributes', 'list'];
+    ```
 
-3. Add to the tracked model the following trait:
+    Don't forget to also have the FK column for the relationship to tracked model.
 
-    `use HistoryTracker;`
+3. Use the trait in the tracked model:
 
-4. Add to the tracked model the following property:
+    ```php
+       use HistoryTracker;
+    ```
 
-    `protected $historyModel = ModelHistory::class`
+4. Add the `$historyModel` property to the tracked model:
 
-5. Now, each time a tracked model instance is created or updated, if any of the tracked attributes changed, an entry will be inserted in the corresponding history table, mirroring the desired data from model and having a link (fk) to the tracked model.
+    ```php
+       protected  = ModelHistory::class;
+    ```
+
+Now, each time a tracked model instance is created or updated, 
+if any of the tracked attributes changed, 
+an entry will be inserted in the corresponding history table, 
+mirroring the desired data from model and having a link (FK) to the tracked model.
 
 ### Notes
 
-The [Core](https://github.com/laravel-enso/Core) package comes with this library included.
+[Laravel Enso](https://github.com/laravel-enso/Enso) already included and ready to use out of the box.
+The package itself has no other dependencies beyond Laravel.
 
 <!--h-->
 ### Contributions
