@@ -15,7 +15,7 @@ Simple to use, customizable Laravel Model history tracking utility trait
 
 The trait helps keep track of the changes made to a model by saving a snapshot for each relevant update of the model to a different 'history' table.
 
-The records in the history table are linked via FK to the original model.
+The records in the history table are linked via FK to the original model. Setting a FK *constraint* on the DB column may be set if necessary.
 
 ### Usage
 You can choose the attributes you want to track from the model by declaring them as fillable in the history model.
@@ -30,7 +30,7 @@ When the model is created an initial snapshot of the desired attributes is saved
         protected $fillable = ['tracked', 'attributes', 'list'];
     ```
 
-    Don't forget to also have the FK column for the relationship to tracked model.
+    Don't forget to also have the FK column for the relationship to the tracked model.
 
 3. Use the trait in the tracked model:
 
