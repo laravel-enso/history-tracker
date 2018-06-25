@@ -14,18 +14,20 @@ Simple to use, customizable Laravel Model history tracking utility trait
 ### Details
 
 The trait helps keep track of the changes made to a model by saving a snapshot for each relevant update of the model to a different 'history' table.
-Each record in the history table is linked via a FK to the original model.
+
+The records in the history table are linked via FK to the original model.
 
 ### Usage
-You can choose the attributes you want to track from the model by declaring them as fillable in the history model. 
- When the model is created a first snapshot of the desired attributes is saved. When the model is updated, if any one of the tracked attributes has changed, a new snapshot/history entry is persisted.  
+You can choose the attributes you want to track from the model by declaring them as fillable in the history model.
+
+When the model is created an initial snapshot of the desired attributes is saved. When the model is updated, if any one of the tracked attributes has changed, a new snapshot/history entry is persisted.  
 
 1. Create a histories table, such as `model_histories` - where model is what you need to keep track of.
 
 2. Create a corresponding history model, such as `ModelHistory` and add as fillable the attributes you want tracked:
 
     ```php 
-        protected $fillable = ['model_id', 'tracked', 'attributes', 'list'];
+        protected $fillable = ['tracked', 'attributes', 'list'];
     ```
 
     Don't forget to also have the FK column for the relationship to tracked model.
@@ -41,11 +43,6 @@ You can choose the attributes you want to track from the model by declaring them
     ```php
        protected  = ModelHistory::class;
     ```
-
-Now, each time a tracked model instance is created or updated, 
-if any of the tracked attributes changed, 
-an entry will be inserted in the corresponding history table, 
-mirroring the desired data from model and having a link (FK) to the tracked model.
 
 The trait also defines a relationship to the history model instances, so you can access the snapshots by calling `histories`:
 
