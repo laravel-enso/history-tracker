@@ -41,7 +41,7 @@ When the model is created an initial snapshot of the desired attributes is saved
 4. Add the `$historyModel` property to the tracked model:
 
     ```php
-       protected  = ModelHistory::class;
+       protected $historyModel = ModelHistory::class;
     ```
 
 The trait also defines a relationship to the history model instances, so you can access the snapshots by calling `histories`:
