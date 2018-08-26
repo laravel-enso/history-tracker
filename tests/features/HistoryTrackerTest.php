@@ -14,9 +14,12 @@ class HistoryTrackerTest extends TestCase
     {
         parent::setUp();
 
+        // $this->withoutExceptionHandling();
+
+        $this->createTrackedModelsTable()
+            ->createTrackedModelHistoriesTable();
+
         $this->faker = Factory::create();
-        $this->createTrackedModelsTable();
-        $this->createTrackedModelHistoriesTable();
     }
 
     /** @test */
@@ -42,6 +45,7 @@ class HistoryTrackerTest extends TestCase
     public function keeps_model_in_history_table_after_deleting_it()
     {
         $trackedModel = TrackedModel::create(['name' => $this->faker->word]);
+
         $id = $trackedModel->id;
 
         $trackedModel->delete();
@@ -60,6 +64,8 @@ class HistoryTrackerTest extends TestCase
             $table->string('name');
             $table->timestamps();
         });
+
+        return $this;
     }
 
     private function createTrackedModelHistoriesTable()
