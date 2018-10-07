@@ -9,6 +9,7 @@ use Tests\TestCase;
 class HistoryTrackerTest extends TestCase
 {
     private $faker;
+    private $testModel;
 
     public function setUp()
     {
@@ -16,48 +17,56 @@ class HistoryTrackerTest extends TestCase
 
         // $this->withoutExceptionHandling();
 
-        $this->createTrackedModelsTable()
-            ->createTrackedModelHistoriesTable();
-
         $this->faker = Factory::create();
+
+        $this->testModel = $this->model();
     }
 
     /** @test */
     public function saves_created_model_in_history_table()
     {
-        $trackedModel = TrackedModel::create(['name' => $this->faker->word]);
-
-        $this->assertEquals($trackedModel->name, TrackedModelHistory::first()->name);
+        $this->assertEquals(
+            $this->testModel->name,
+            TrackedModelHistory::first()->name
+        );
     }
 
     /** @test */
     public function saves_updated_model_in_history_table()
     {
-        $trackedModel = TrackedModel::create(['name' => $this->faker->word]);
+        $this->testModel->name = 'Updated';
+        $this->testModel->save();
 
-        $trackedModel->name = 'Updated';
-        $trackedModel->save();
-
-        $this->assertEquals($trackedModel->name, $trackedModel->histories->last()->name);
+        $this->assertEquals(
+            $this->testModel->name,
+            $this->testModel->histories->last()->name
+        );
     }
 
     /** @test */
     public function keeps_model_in_history_table_after_deleting_it()
     {
-        $trackedModel = TrackedModel::create(['name' => $this->faker->word]);
+        $id = $this->testModel->id;
 
-        $id = $trackedModel->id;
+        $this->testModel->delete();
 
-        $trackedModel->delete();
-
-        $this->assertNull($trackedModel->fresh());
+        $this->assertNull($this->testModel->fresh());
 
         $count = TrackedModelHistory::whereTrackedModelId($id)->count();
 
         $this->assertEquals(1, $count);
     }
 
-    private function createTrackedModelsTable()
+    private function model()
+    {
+        $this->createTestTables();
+
+        return TrackedModel::create([
+            'name' => $this->faker->word
+        ]);
+    }
+
+    private function createTestTables()
     {
         Schema::create('tracked_models', function ($table) {
             $table->increments('id');
@@ -65,11 +74,6 @@ class HistoryTrackerTest extends TestCase
             $table->timestamps();
         });
 
-        return $this;
-    }
-
-    private function createTrackedModelHistoriesTable()
-    {
         Schema::create('tracked_model_histories', function ($table) {
             $table->increments('id');
             $table->integer('tracked_model_id')->unsigned();
@@ -77,6 +81,7 @@ class HistoryTrackerTest extends TestCase
             $table->timestamps();
         });
     }
+
 }
 
 class TrackedModel extends Model
