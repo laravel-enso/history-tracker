@@ -47,7 +47,7 @@ trait HistoryTracker
 
     private function missesHistoryModel()
     {
-        return !property_exists($this, 'historyModel');
+        return ! property_exists($this, 'historyModel');
     }
 
     private function needsHistory()
