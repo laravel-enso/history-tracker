@@ -11,7 +11,7 @@ class HistoryTrackerTest extends TestCase
     private $faker;
     private $testModel;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
