@@ -41,6 +41,7 @@ trait HistoryTracker
 
         if ($this->needsHistory()) {
             $history = new $this->historyModel($this->toArray());
+            unset($history->id);
             $this->histories()->save($history);
         }
     }
