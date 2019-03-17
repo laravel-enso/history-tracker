@@ -17,7 +17,7 @@ The records in the history table are linked via FK to the original model. Settin
 
 ### Configuration & Usage
 
-Be sure to check out the full documentation for this package available at [docs.laravel-enso.com](https://docs.laravel-enso.com/packages/history-tracker.html)
+Be sure to check out the full documentation for this package available at [docs.laravel-enso.com](https://docs.laravel-enso.com/backend/history-tracker.html)
 
 ### Contributions
 
