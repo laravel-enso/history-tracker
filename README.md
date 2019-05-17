@@ -1,9 +1,9 @@
 # HistoryTracker
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/71c1e5e3e2c940fa8f3fb0ebda9db1fb)](https://www.codacy.com/app/laravel-enso/HistoryTracker?utm_source=github.com&utm_medium=referral&utm_content=laravel-enso/HistoryTracker&utm_campaign=badger)
-[![StyleCI](https://styleci.io/repos/85500161/shield?branch=master)](https://styleci.io/repos/85500161)
-[![License](https://poser.pugx.org/laravel-enso/historytracker/license)](https://packagist.org/packages/laravel-enso/historytracker)
-[![Total Downloads](https://poser.pugx.org/laravel-enso/historytracker/downloads)](https://packagist.org/packages/laravel-enso/historytracker)
-[![Latest Stable Version](https://poser.pugx.org/laravel-enso/historytracker/version)](https://packagist.org/packages/laravel-enso/historytracker)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/71c1e5e3e2c940fa8f3fb0ebda9db1fb)](https://www.codacy.com/app/laravel-enso/history-tracker?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=laravel-enso/history-tracker&amp;utm_campaign=Badge_Grade)
+[![StyleCI](https://github.styleci.io/repos/85500161/shield?branch=master)](https://github.styleci.io/repos/85500161)
+[![License](https://poser.pugx.org/laravel-enso/history-tracker/license)](https://packagist.org/packages/laravel-enso/history-tracker)
+[![Total Downloads](https://poser.pugx.org/laravel-enso/history-tracker/downloads)](https://packagist.org/packages/laravel-enso/history-tracker)
+[![Latest Stable Version](https://poser.pugx.org/laravel-enso/history-tracker/version)](https://packagist.org/packages/laravel-enso/history-tracker)
 
 Simple to use, customizable Laravel Model history tracking utility trait
 

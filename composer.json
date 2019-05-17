@@ -1,12 +1,12 @@
 {
-    "name": "laravel-enso/historytracker",
+    "name": "laravel-enso/history-tracker",
     "description": "Model history tracking dependency for Laravel Enso",
     "keywords": [
         "laravel-enso",
-        "historytracker",
+        "history-tracker",
         "history-tracker"
     ],
-    "homepage": "https://github.com/laravel-enso/HistoryTracker",
+    "homepage": "https://github.com/laravel-enso/history-tracker",
     "type": "library",
     "license": "MIT",
     "authors": [
