@@ -40,9 +40,7 @@ trait HistoryTracker
         }
 
         if ($this->needsHistory()) {
-            $history = new $this->historyModel($this->toArray());
-            unset($history->id);
-            $this->histories()->save($history);
+            $this->histories()->save($this->historyModelInstance());
         }
     }
 
@@ -57,5 +55,17 @@ trait HistoryTracker
             ->keys()
             ->intersect((new $this->historyModel())->getFillable())
             ->isNotEmpty();
+    }
+
+    private function historyModelInstance()
+    {
+        $history = new $this->historyModel();
+
+        return collect(($history)->getFillable())
+            ->reduce(function ($history, $attribute) {
+                $history->{$attribute} = $this->{$attribute};
+
+                return $history;
+            }, $history);
     }
 }
