@@ -9,13 +9,7 @@ Simple to use, customizable Laravel Model history tracking utility trait
 
 [Laravel Enso](https://github.com/laravel-enso/Enso) already includes this package
 
-### Details
-
-The trait helps keep track of the changes made to a model by saving a snapshot for each relevant update of the model to a different 'history' table.
-
-The records in the history table are linked via FK to the original model. Setting a FK *constraint* on the DB column may be set if necessary.
-
-### Configuration & Usage
+### Installation, Configuration & Usage
 
 Be sure to check out the full documentation for this package available at [docs.laravel-enso.com](https://docs.laravel-enso.com/backend/history-tracker.html)
 
@@ -26,4 +20,3 @@ are welcome. Pull requests are great, but issues are good too.
 ### License
 
 This package is released under the MIT license.
-<!--/h-->
