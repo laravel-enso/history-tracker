@@ -35,7 +35,7 @@ trait HistoryTracker
         if ($this->missesHistoryModel()) {
             throw new LogicException(__(
                 'You forgot to set up the historyModel property for class: :class',
-                ['class' => get_class($this)]
+                ['class' => self::class]
             ));
         }
 
@@ -61,7 +61,7 @@ trait HistoryTracker
     {
         $history = new $this->historyModel();
 
-        return collect(($history)->getFillable())
+        return collect($history->getFillable())
             ->reduce(function ($history, $attribute) {
                 $history->{$attribute} = $this->{$attribute};
 
