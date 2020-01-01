@@ -10,9 +10,9 @@ trait HistoryTracker
 
     protected static function bootHistoryTracker()
     {
-        self::created(fn($model) => $model->saveHistory());
+        self::created(fn ($model) => $model->saveHistory());
 
-        self::updated(fn($model) => $model->saveHistory());
+        self::updated(fn ($model) => $model->saveHistory());
 
         self::deleted(function ($model) {
             if (method_exists($model, 'bootSoftDeletes')) {
