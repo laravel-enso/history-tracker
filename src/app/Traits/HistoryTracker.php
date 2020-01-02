@@ -1,24 +1,22 @@
 <?php
 
-namespace LaravelEnso\HistoryTracker\app\Traits;
+namespace LaravelEnso\HistoryTracker\App\Traits;
 
+use Illuminate\Support\Collection;
 use LogicException;
 
 trait HistoryTracker
 {
-    // protected $historyModel = HistoryModel::class;
+    // protected $historyModel = HistoryModel::class; //mandatory
 
-    protected static function bootHistoryTracker()
+    public static function bootHistoryTracker()
     {
-        self::created(fn ($model) => $model->saveHistory());
+        self::created(fn ($model) => $model->attemptHistoryCreate());
 
-        self::updated(fn ($model) => $model->saveHistory());
+        self::updated(fn ($model) => $model->attemptHistoryCreate());
 
-        self::deleted(function ($model) {
-            if (method_exists($model, 'bootSoftDeletes')) {
-                $model->saveHistory();
-            }
-        });
+        self::deleted(fn ($model) => $model
+            ->attemptHistoryCreate(method_exists($model, 'bootSoftDeletes')));
     }
 
     public function histories()
@@ -26,29 +24,29 @@ trait HistoryTracker
         return $this->hasMany($this->historyModel);
     }
 
-    private function saveHistory()
+    private function attemptHistoryCreate($qualifies = true)
     {
-        if ($this->missesHistoryModel()) {
-            throw new LogicException(__(
-                'You forgot to set up the historyModel property for class: :class',
-                ['class' => self::class]
-            ));
-        }
-
-        if ($this->needsHistory()) {
+        if ($qualifies && $this->historyModelExists()
+            && $this->monitoredAttributesChanged()) {
             $this->histories()->save($this->historyModelInstance());
         }
     }
 
-    private function missesHistoryModel()
+    private function historyModelExists()
     {
-        return ! property_exists($this, 'historyModel');
+        if (property_exists($this, 'historyModel')) {
+            return true;
+        }
+
+        throw new LogicException(__(
+            'You did not to set up the "historyModel" property for model: :model',
+            ['model' => self::class]
+        ));
     }
 
-    private function needsHistory()
+    private function monitoredAttributesChanged()
     {
-        return collect($this->getDirty())
-            ->keys()
+        return (new Collection($this->getDirty()))->keys()
             ->intersect((new $this->historyModel())->getFillable())
             ->isNotEmpty();
     }
@@ -57,11 +55,8 @@ trait HistoryTracker
     {
         $history = new $this->historyModel();
 
-        return collect($history->getFillable())
-            ->reduce(function ($history, $attribute) {
-                $history->{$attribute} = $this->{$attribute};
-
-                return $history;
-            }, $history);
+        return (new Collection($history->getFillable()))
+            ->reduce(fn ($history, $attribute) => tap($history)
+                ->fill([$attribute => $this->{$attribute}]), $history);
     }
 }

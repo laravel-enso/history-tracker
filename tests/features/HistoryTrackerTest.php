@@ -3,7 +3,7 @@
 use Faker\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Schema;
-use LaravelEnso\HistoryTracker\app\Traits\HistoryTracker;
+use LaravelEnso\HistoryTracker\App\Traits\HistoryTracker;
 use Tests\TestCase;
 
 class HistoryTrackerTest extends TestCase
@@ -19,6 +19,8 @@ class HistoryTrackerTest extends TestCase
 
         $this->faker = Factory::create();
 
+        $this->createTables();
+
         $this->testModel = $this->model();
     }
 
@@ -26,20 +28,17 @@ class HistoryTrackerTest extends TestCase
     public function saves_created_model_in_history_table()
     {
         $this->assertEquals(
-            $this->testModel->name,
-            TrackedModelHistory::first()->name
+            $this->testModel->name, TrackedModelHistory::first()->name
         );
     }
 
     /** @test */
     public function saves_updated_model_in_history_table()
     {
-        $this->testModel->name = 'Updated';
-        $this->testModel->save();
+        $this->testModel->update(['name' => 'Updated']);
 
         $this->assertEquals(
-            $this->testModel->name,
-            $this->testModel->histories->last()->name
+            $this->testModel->name, $this->testModel->histories->last()->name
         );
     }
 
@@ -59,14 +58,10 @@ class HistoryTrackerTest extends TestCase
 
     private function model()
     {
-        $this->createTestTables();
-
-        return TrackedModel::create([
-            'name' => $this->faker->word
-        ]);
+        return TrackedModel::create(['name' => $this->faker->word]);
     }
 
-    private function createTestTables()
+    private function createTables()
     {
         Schema::create('tracked_models', function ($table) {
             $table->increments('id');
@@ -81,7 +76,6 @@ class HistoryTrackerTest extends TestCase
             $table->timestamps();
         });
     }
-
 }
 
 class TrackedModel extends Model
@@ -89,6 +83,7 @@ class TrackedModel extends Model
     use HistoryTracker;
 
     protected $historyModel = TrackedModelHistory::class;
+
     protected $fillable = ['name'];
 }
 
