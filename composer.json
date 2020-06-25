@@ -3,20 +3,17 @@
     "description": "Model history tracking dependency for Laravel Enso",
     "keywords": [
         "laravel-enso",
-        "history-tracker",
         "history-tracker"
     ],
     "homepage": "https://github.com/laravel-enso/history-tracker",
     "type": "library",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Adrian Ocneanu",
-            "email": "aocneanu@gmail.com",
-            "homepage": "https://laravel-enso.com",
-            "role": "Developer"
-        }
-    ],
+    "authors": [{
+        "name": "Adrian Ocneanu",
+        "email": "aocneanu@gmail.com",
+        "homepage": "https://laravel-enso.com",
+        "role": "Developer"
+    }],
     "require": {
         "php": ">=7.4.0",
         "laravel/framework": "^7.0"

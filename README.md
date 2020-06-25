@@ -1,5 +1,5 @@
 # HistoryTracker
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/71c1e5e3e2c940fa8f3fb0ebda9db1fb)](https://www.codacy.com/app/laravel-enso/history-tracker?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=laravel-enso/history-tracker&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/dfac1c26901d4e8da17d0bb089509577)](https://www.codacy.com/gh/laravel-enso/history-tracker?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=laravel-enso/history-tracker&amp;utm_campaign=Badge_Grade)
 [![StyleCI](https://github.styleci.io/repos/85500161/shield?branch=master)](https://github.styleci.io/repos/85500161)
 [![License](https://poser.pugx.org/laravel-enso/history-tracker/license)](https://packagist.org/packages/laravel-enso/history-tracker)
 [![Total Downloads](https://poser.pugx.org/laravel-enso/history-tracker/downloads)](https://packagist.org/packages/laravel-enso/history-tracker)

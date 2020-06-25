@@ -3,7 +3,7 @@
 use Faker\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Schema;
-use LaravelEnso\HistoryTracker\App\Traits\HistoryTracker;
+use LaravelEnso\HistoryTracker\Traits\HistoryTracker;
 use Tests\TestCase;
 
 class HistoryTrackerTest extends TestCase
