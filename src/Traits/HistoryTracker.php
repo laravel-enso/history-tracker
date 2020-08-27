@@ -24,12 +24,17 @@ trait HistoryTracker
         return $this->hasMany($this->historyModel);
     }
 
-    private function attemptHistoryCreate($qualifies = true)
+    protected function attemptHistoryCreate($qualifies = true)
     {
         if ($qualifies && $this->historyModelExists()
             && $this->monitoredAttributesChanged()) {
-            $this->histories()->save($this->historyModelInstance());
+            $this->createHistoryModel();
         }
+    }
+
+    protected function createHistoryModel()
+    {
+        $this->histories()->save($this->historyModelInstance());
     }
 
     private function historyModelExists()
