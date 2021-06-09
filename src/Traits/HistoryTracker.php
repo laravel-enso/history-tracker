@@ -26,13 +26,15 @@ trait HistoryTracker
 
     private function attemptHistoryCreate($qualifies = true)
     {
-        if ($qualifies && $this->historyModelExists()
-            && $this->monitoredAttributesChanged()) {
+        $shouldSave = $qualifies && $this->historyModelExists()
+            && $this->monitoredAttributesChanged();
+
+        if ($shouldSave) {
             $this->histories()->save($this->historyModelInstance());
         }
     }
 
-    private function historyModelExists()
+    private function historyModelExists(): bool
     {
         if (property_exists($this, 'historyModel')) {
             return true;
@@ -46,7 +48,7 @@ trait HistoryTracker
 
     private function monitoredAttributesChanged()
     {
-        return (new Collection($this->getDirty()))->keys()
+        return Collection::wrap($this->getDirty())->keys()
             ->intersect((new $this->historyModel())->getFillable())
             ->isNotEmpty();
     }
@@ -55,7 +57,7 @@ trait HistoryTracker
     {
         $history = new $this->historyModel();
 
-        return (new Collection($history->getFillable()))
+        return Collection::wrap($history->getFillable())
             ->reduce(fn ($history, $attribute) => tap($history)
                 ->fill([$attribute => $this->{$attribute}]), $history);
     }

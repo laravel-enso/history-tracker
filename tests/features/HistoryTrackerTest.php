@@ -15,8 +15,6 @@ class HistoryTrackerTest extends TestCase
     {
         parent::setUp();
 
-        // $this->withoutExceptionHandling();
-
         $this->faker = Factory::create();
 
         $this->createTables();
