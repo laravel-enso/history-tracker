@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Schema;
 use LaravelEnso\HistoryTracker\Traits\HistoryTracker;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class HistoryTrackerTest extends TestCase
 {
@@ -22,7 +23,7 @@ class HistoryTrackerTest extends TestCase
         $this->testModel = $this->model();
     }
 
-    /** @test */
+    #[Test]
     public function saves_created_model_in_history_table()
     {
         $this->assertEquals(
@@ -30,7 +31,7 @@ class HistoryTrackerTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function saves_updated_model_in_history_table()
     {
         $this->testModel->update(['name' => 'Updated']);
@@ -40,7 +41,7 @@ class HistoryTrackerTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function keeps_model_in_history_table_after_deleting_it()
     {
         $id = $this->testModel->id;
